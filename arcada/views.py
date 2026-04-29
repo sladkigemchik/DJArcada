@@ -1,21 +1,18 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from arcada.models import GameArticle
 
 menu = [
     {'title': 'О сайте', 'url_name': 'about'},
 ]
 
-cats_db = [
-    {'id': 1, 'name': 'Экшен'},
-    {'id': 2, 'name': 'Стратегии'},
-    {'id': 3, 'name': 'RPG'},
-]
-
 def index(request):
+    articles = GameArticle.published.all() 
+    print(articles)
+    print("Hello")
     data = {
         'title': 'Главная страница',
         'menu': menu,
-        'cat_selected': 0,
+        'articles': articles,
     }
     return render(request, 'arcada/index.html', context=data)
 
@@ -26,5 +23,10 @@ def about(request):
     }
     return render(request, 'arcada/about.html', context=data)
 
+def article_detail(request, article_slug):
+    article = get_object_or_404(GameArticle.published.all(), slug=article_slug)
+    return render(request, 'arcada/article_detail.html', {'article': article})
+
 def page_not_found(request, exception):
-    return HttpResponse("<h1>Страница не найдена</h1>")
+    from django.http import HttpResponseNotFound
+    return HttpResponseNotFound("<h1>Страница не найдена</h1>")

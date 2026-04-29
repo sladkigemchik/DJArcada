@@ -1007,3 +1007,29 @@ footer {
     display: none;
   }
 }
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.article-card {
+  background: rgba(18, 18, 37, 0.8);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(106, 17, 203, 0.3);
+  transition: all 0.3s ease;
+}
+.article-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon);
+}
+.article-card h3 {
+  color: var(--neon);
+  margin-bottom: 15px;
+}
+.article-card p {
+  margin: 10px 0;
+  color: var(--text-light);
+}

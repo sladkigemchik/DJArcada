@@ -215,6 +215,28 @@
       </div>
     </section>
 
+    <!-- Список игровых статей из БД -->
+<section class="articles-section">
+    <div class="figma-container">
+        <h2 class="section-title">Игровые предложения</h2>
+        
+        <div class="articles-grid">
+            {% for article in articles %}
+            <div class="article-card">
+                <h3>{{ article.title }}</h3>
+                <p><strong>Игра:</strong> {{ article.game_name }}</p>
+                <p><strong>Жанр:</strong> {{ article.genre|default:"Не указан" }}</p>
+                <p><strong>Цена:</strong> {{ article.price }} ₽</p>
+                <p>{{ article.content|truncatewords:20 }}</p>
+                <a href="{{ article.get_absolute_url }}" class="hero-btn" style="padding: 10px 20px; font-size: 0.9rem;">Подробнее →</a>
+            </div>
+            {% empty %}
+            <p>Статьи пока не добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
     <!-- Блок 5: Регистрация -->
     <section id="registration" class="figma-block">
       <div class="figma-container">

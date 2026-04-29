@@ -1,0 +1,41 @@
+{% extends 'arcada/base.html' %} {% load static %} {% block title %}
+АРКАДА-ПЛАТФОРМА{% endblock %} {% block content %}
+<section class="figma-block" style="padding-top: 120px">
+  <div class="figma-container">
+    <a
+      href="{% url 'home' %}"
+      class="back-link"
+      style="
+        color: var(--neon);
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 30px;
+      "
+      >← Назад к списку</a
+    >
+
+    <h1 style="color: var(--neon); margin-bottom: 20px">{{ article.title }}</h1>
+
+    <div
+      style="
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(106, 17, 203, 0.3);
+      "
+    >
+      <span><i class="fas fa-gamepad"></i> {{ article.game_name }}</span>
+      <span><i class="fas fa-tag"></i> {{ article.genre }}</span>
+      <span><i class="fas fa-ruble-sign"></i> {{ article.price }} ₽</span>
+      <span
+        ><i class="fas fa-calendar"></i> Обновлено: {{
+        article.time_create|date:"d.m.Y" }}</span
+      >
+    </div>
+
+    <div style="line-height: 1.8">{{ article.content|linebreaks }}</div>
+  </div>
+</section>
+{% endblock %}
