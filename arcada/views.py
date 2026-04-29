@@ -1,29 +1,30 @@
-from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import redirect
-from django.urls import reverse
+from django.shortcuts import render
+from django.http import HttpResponse
+
+menu = [
+    {'title': 'О сайте', 'url_name': 'about'},
+]
+
+cats_db = [
+    {'id': 1, 'name': 'Экшен'},
+    {'id': 2, 'name': 'Стратегии'},
+    {'id': 3, 'name': 'RPG'},
+]
 
 def index(request):
-    return HttpResponse("Страница приложения arcada.")
+    data = {
+        'title': 'Главная страница',
+        'menu': menu,
+        'cat_selected': 0,
+    }
+    return render(request, 'arcada/index.html', context=data)
 
-def categories(request, game_id):
-    return HttpResponse(f"<h1>Статьи по категориям</h1><p>id: {game_id}</p>")
-
-def categories_by_slug(request, game_slug):
-    if request.GET:
-        print(request.GET)
-    return HttpResponse(f"<h1>Статьи по категориям</h1><p>slug: {game_slug}</p>")
-
-def archive(request, year):
-    if year > "2024":
-        raise Http404()
-    return HttpResponse(f"<h1>Архив по годам</h1><p>{year}</p>")
+def about(request):
+    data = {
+        'title': 'О сайте',
+        'menu': menu,
+    }
+    return render(request, 'arcada/about.html', context=data)
 
 def page_not_found(request, exception):
-    return HttpResponseNotFound("<h1>Страница не найдена</h1>")
-
-def old_archive(request):
-    return redirect('archive', year=2020)
-
-def reverse_example(request):
-    url = reverse('game_id', args=(5,))
-    return HttpResponse(f"URL через reverse: {url}")
+    return HttpResponse("<h1>Страница не найдена</h1>")

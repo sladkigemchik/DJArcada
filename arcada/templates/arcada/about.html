@@ -1,0 +1,70 @@
+{% extends 'arcada/base.html' %} {% load static %} {% block title %}Блог |
+АРКАДА-ПЛАТФОРМА{% endblock %} {% block content %}
+<section class="figma-block" style="padding-top: 120px">
+  <div class="figma-container">
+    <h2 class="section-title">Блог платформы</h2>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <h3><i class="fas fa-newspaper"></i> Новости</h3>
+        <p>Последние обновления платформы, анонсы турниров и новые игры.</p>
+        <a href="#" style="color: var(--neon); display: block; margin-top: 15px"
+          >Читать все новости →</a
+        >
+      </div>
+
+      <div class="about-card">
+        <h3><i class="fas fa-chart-line"></i> Аналитика</h3>
+        <p>
+          Анализ трендов F2P рынка, экономики Play-to-Earn и
+          blockchain-гейминга.
+        </p>
+        <a href="#" style="color: var(--neon); display: block; margin-top: 15px"
+          >Смотреть аналитику →</a
+        >
+      </div>
+
+      <div class="about-card">
+        <h3><i class="fas fa-graduation-cap"></i> Гайды</h3>
+        <p>
+          Полезные руководства для игроков: как начать зарабатывать, стратегии и
+          советы.
+        </p>
+        <a href="#" style="color: var(--neon); display: block; margin-top: 15px"
+          >Изучить гайды →</a
+        >
+      </div>
+    </div>
+
+    <div
+      style="
+        background: rgba(18, 18, 37, 0.8);
+        border-radius: 20px;
+        padding: 40px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+      "
+    >
+      <h3 style="color: var(--neon); margin-bottom: 20px">
+        Турнир "Аркадный чемпион": итоги
+      </h3>
+      <p style="margin-bottom: 20px">
+        Первый крупный турнир на нашей платформе собрал более 5000 участников.
+        Призовой фонд в $10,000 был разыгран между 50 лучшими игроками...
+      </p>
+      <div style="display: flex; gap: 15px; margin-top: 30px">
+        <span
+          style="
+            background: rgba(106, 17, 203, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: var(--neon);
+          "
+          >Турниры</span
+        >
+        <span style="color: var(--text-light)">15 марта 2024</span>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
