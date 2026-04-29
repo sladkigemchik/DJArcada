@@ -1033,3 +1033,80 @@ footer {
   margin: 10px 0;
   color: var(--text-light);
 }
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.article-card {
+  background: rgba(18, 18, 37, 0.8);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(106, 17, 203, 0.3);
+  transition: all 0.3s ease;
+}
+.article-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon);
+}
+.article-card h3 {
+  color: var(--neon);
+  margin-bottom: 15px;
+}
+.categories-tags-section {
+  margin: 60px 0 40px;
+  padding: 30px 0;
+  background: rgba(18, 18, 37, 0.5);
+  border-radius: 30px;
+}
+.categories-tags-wrapper {
+  display: flex;
+  gap: 60px;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+.categories-box,
+.tags-box {
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+  background: rgba(10, 10, 20, 0.7);
+  border-radius: 20px;
+  border: 1px solid rgba(106, 17, 203, 0.3);
+}
+.categories-box h3,
+.tags-box h3 {
+  color: var(--neon);
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+.categories-box ul,
+.tags-box ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+}
+.categories-box li,
+.tags-box li {
+  margin: 12px 0;
+}
+.categories-box a,
+.tags-box a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.categories-box a:hover,
+.tags-box a:hover {
+  color: var(--neon);
+  padding-left: 5px;
+}
+.categories-box .selected,
+.tags-box .selected {
+  color: var(--neon);
+  font-weight: bold;
+}

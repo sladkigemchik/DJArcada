@@ -1,6 +1,25 @@
 from django.db import models
 from django.urls import reverse
 
+class TagPost(models.Model):
+    tag = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.tag
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'tag_slug': self.slug})
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'cat_slug': self.slug})
 
 class PublishedManager(models.Manager):
     """Менеджер для получения только опубликованных статей"""
@@ -10,6 +29,8 @@ class PublishedManager(models.Manager):
 
 class GameArticle(models.Model):
     """Модель для хранения статей об играх"""
+    tags = models.ManyToManyField('TagPost', blank=True, related_name='articles')
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, related_name='articles')
     
     class Status(models.IntegerChoices):
         DRAFT = 0, "Черновик"

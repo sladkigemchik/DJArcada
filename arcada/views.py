@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from arcada.models import GameArticle
+from arcada.models import GameArticle, Category, TagPost
 
 menu = [
     {'title': 'О сайте', 'url_name': 'about'},
@@ -30,3 +30,23 @@ def article_detail(request, article_slug):
 def page_not_found(request, exception):
     from django.http import HttpResponseNotFound
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+
+def show_category(request, cat_slug):
+    category = get_object_or_404(Category, slug=cat_slug)
+    articles = GameArticle.published.filter(cat=category)
+    return render(request, 'arcada/index.html', {
+        'title': category.name,
+        'articles': articles,
+        'menu': menu,
+        'cat_selected': category.pk,
+    })
+
+def show_tag_articles(request, tag_slug):
+    tag = get_object_or_404(TagPost, slug=tag_slug)
+    articles = tag.articles.filter(status=GameArticle.Status.PUBLISHED)
+    return render(request, 'arcada/index.html', {
+        'title': f'Тег: {tag.tag}',
+        'articles': articles,
+        'menu': menu,
+        'cat_selected': None,
+    })
