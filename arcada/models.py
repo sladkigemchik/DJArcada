@@ -39,6 +39,13 @@ class GameArticle(models.Model):
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время обновления")
     status = models.IntegerField(choices=Status.choices, default=Status.DRAFT, verbose_name="Статус")
     
+    image = models.ImageField(
+    upload_to='games/%Y/%m/%d/',
+    blank=True,
+    null=True,
+    verbose_name='Изображение'
+)
+    
     objects = models.Manager()           
     published = PublishedManager()       
     

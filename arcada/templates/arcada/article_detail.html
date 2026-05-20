@@ -1,5 +1,13 @@
 {% extends 'arcada/base.html' %} {% load static %} {% block title %}
-АРКАДА-ПЛАТФОРМА{% endblock %} {% block content %}
+АРКАДА-ПЛАТФОРМА{% endblock %} {% block content %} {% if article.image %}
+<div class="article-image">
+  <img
+    src="{{ article.image.url }}"
+    alt="{{ article.title }}"
+    style="max-width: 100%; border-radius: 20px"
+  />
+</div>
+{% endif %}
 <section class="figma-block" style="padding-top: 120px">
   <div class="figma-container">
     <a
@@ -29,10 +37,6 @@
       <span><i class="fas fa-gamepad"></i> {{ article.game_name }}</span>
       <span><i class="fas fa-tag"></i> {{ article.genre }}</span>
       <span><i class="fas fa-ruble-sign"></i> {{ article.price }} ₽</span>
-      <span
-        ><i class="fas fa-calendar"></i> Обновлено: {{
-        article.time_create|date:"d.m.Y" }}</span
-      >
     </div>
 
     <div style="line-height: 1.8">{{ article.content|linebreaks }}</div>

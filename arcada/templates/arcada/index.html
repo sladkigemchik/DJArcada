@@ -1,231 +1,344 @@
 {% extends 'arcada/base.html' %}
 {% load static %}
-{% load arcada_tags %}
+{% load arcada_tags %} 
 
-{% block title %}Free-to-Play Игровая Платформа{% endblock %}
+{%block title %}Free-to-Play Игровая Платформа{% endblock %}
 
 {% block content %}
 <!-- Блок 1: Герой -->
 <section id="hero" class="figma-block">
-    <div class="figma-container">
-        <div class="hero-content">
-            <h1>АРКАДА-ПЛАТФОРМА</h1>
-            <p class="hero-subtitle">
-                Инновационная Free-to-Play экосистема с Play-to-Earn механикой.
-                Играй, создавай, зарабатывай в мире аркадных игр нового поколения.
-            </p>
-            <div>
-                <a href="#registration" class="hero-btn">
-                    <i class="fas fa-rocket"></i> НАЧАТЬ БЕСПЛАТНО
-                </a>
-            </div>
-        </div>
+  <div class="figma-container">
+    <div class="hero-content">
+      <h1>АРКАДА-ПЛАТФОРМА</h1>
+      <p class="hero-subtitle">
+        Инновационная Free-to-Play экосистема с Play-to-Earn механикой. Играй,
+        создавай, зарабатывай в мире аркадных игр нового поколения.
+      </p>
+      <div>
+        <a href="#registration" class="hero-btn">
+          <i class="fas fa-rocket"></i> НАЧАТЬ БЕСПЛАТНО
+        </a>
+      </div>
     </div>
-    <a href="#about" class="scroll-down">
-        <i class="fas fa-chevron-down"></i>
-    </a>
+  </div>
+  <a href="#about" class="scroll-down">
+    <i class="fas fa-chevron-down"></i>
+  </a>
+  {% if article.image %}
+  <img
+    src="{{ article.image.url }}"
+    alt="{{ article.title }}"
+    style="width: 100%; height: 150px; object-fit: cover; border-radius: 15px"
+  />
+  {% endif %}
 </section>
 
 <!-- Блок 2: О проекте -->
 <section id="about" class="figma-block">
-    <div class="figma-container">
-        <h2 class="section-title">О ПРОЕКТЕ</h2>
-        <div class="about-grid">
-            <div class="about-card">
-                <h3><i class="fas fa-bullseye"></i> Целевая аудитория</h3>
-                <p>Геймеры 18-35 лет, киберспортсмены, стримеры, инвесторы в игровые активы, разработчики indie-игр, блокчейн-энтузиасты.</p>
-            </div>
-            <div class="about-card">
-                <h3><i class="fas fa-road"></i> Этапы развития</h3>
-                <p>2023: Запуск MVP • 2024: NFT-маркетплейс • 2025: Мобильные приложения и VR-режим • 2026: Полная децентрализация DAO</p>
-            </div>
-            <div class="about-card">
-                <h3><i class="fas fa-crown"></i> Тарифные планы</h3>
-                <p>FREE: Базовые функции • PRO: Расширенные возможности • ENTERPRISE: White-label решения для бизнеса и кастомные турниры.</p>
-            </div>
-            <div class="about-card">
-                <h3><i class="fas fa-chart-line"></i> Концепция</h3>
-                <p>Объединяем классические аркадные механики с современными технологиями: блокчейн, NFT, VR и социальные функции.</p>
-            </div>
-        </div>
-
-        <h3 style="color: var(--neon); margin: 40px 0 25px; text-align: center; font-size: 1.8rem;">Галерея платформы</h3>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="{% static 'arcada/pic/1.jpg' %}" alt="Динамичный игровой процесс на Аркада-Платформа" />
-                <div class="image-caption">Захватывающий геймплей</div>
-            </div>
-            <div class="gallery-item">
-                <img src="{% static 'arcada/pic/2.png' %}" alt="Турнирная таблица и лидеры соревнования" />
-                <div class="image-caption">Турниры и лидерборды</div>
-            </div>
-            <div class="gallery-item">
-                <img src="{% static 'arcada/pic/3.jpg' %}" alt="Коллекция уникальных NFT-предметов и наград" />
-                <div class="image-caption">Коллекционные NFT-активы</div>
-            </div>
-        </div>
+  <div class="figma-container">
+    <h2 class="section-title">О ПРОЕКТЕ</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3><i class="fas fa-bullseye"></i> Целевая аудитория</h3>
+        <p>
+          Геймеры 18-35 лет, киберспортсмены, стримеры, инвесторы в игровые
+          активы, разработчики indie-игр, блокчейн-энтузиасты.
+        </p>
+      </div>
+      <div class="about-card">
+        <h3><i class="fas fa-road"></i> Этапы развития</h3>
+        <p>
+          2023: Запуск MVP • 2024: NFT-маркетплейс • 2025: Мобильные приложения
+          и VR-режим • 2026: Полная децентрализация DAO
+        </p>
+      </div>
+      <div class="about-card">
+        <h3><i class="fas fa-crown"></i> Тарифные планы</h3>
+        <p>
+          FREE: Базовые функции • PRO: Расширенные возможности • ENTERPRISE:
+          White-label решения для бизнеса и кастомные турниры.
+        </p>
+      </div>
+      <div class="about-card">
+        <h3><i class="fas fa-chart-line"></i> Концепция</h3>
+        <p>
+          Объединяем классические аркадные механики с современными технологиями:
+          блокчейн, NFT, VR и социальные функции.
+        </p>
+      </div>
     </div>
+
+    <h3
+      style="
+        color: var(--neon);
+        margin: 40px 0 25px;
+        text-align: center;
+        font-size: 1.8rem;
+      "
+    >
+      Галерея платформы
+    </h3>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img
+          src="{% static 'arcada/pic/1.jpg' %}"
+          alt="Динамичный игровой процесс на Аркада-Платформа"
+        />
+        <div class="image-caption">Захватывающий геймплей</div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="{% static 'arcada/pic/2.png' %}"
+          alt="Турнирная таблица и лидеры соревнования"
+        />
+        <div class="image-caption">Турниры и лидерборды</div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="{% static 'arcada/pic/3.jpg' %}"
+          alt="Коллекция уникальных NFT-предметов и наград"
+        />
+        <div class="image-caption">Коллекционные NFT-активы</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Блок 3: Выгоды -->
 <section id="benefits" class="figma-block">
-    <div class="figma-container">
-        <h2 class="section-title">ВАШИ ВЫГОДЫ</h2>
-        <div class="benefits-container">
-            <div class="benefit-category">
-                <h3>Преимущества</h3>
-                <ul class="benefit-list">
-                    <li><i class="fas fa-check-circle"></i> Бесплатный старт без ограничений</li>
-                    <li><i class="fas fa-check-circle"></i> Play-to-Earn механики</li>
-                    <li><i class="fas fa-check-circle"></i> Ежедневные награды и бонусы</li>
-                    <li><i class="fas fa-check-circle"></i> Социальные функции и кланы</li>
-                    <li><i class="fas fa-check-circle"></i> Регулярные обновления контента</li>
-                </ul>
-            </div>
-            <div class="benefit-category">
-                <h3>Сценарии использования</h3>
-                <ul class="benefit-list">
-                    <li><i class="fas fa-user-friends"></i> Турниры с друзьями</li>
-                    <li><i class="fas fa-stream"></i> Стриминг геймплея</li>
-                    <li><i class="fas fa-chart-bar"></i> Трейдинг игровых активов</li>
-                    <li><i class="fas fa-gem"></i> Коллекционирование NFT</li>
-                    <li><i class="fas fa-code"></i> Создание собственных игр</li>
-                </ul>
-            </div>
-            <div class="benefit-category">
-                <h3>Польза для бизнеса</h3>
-                <ul class="benefit-list">
-                    <li><i class="fas fa-wallet"></i> Низкая стоимость привлечения</li>
-                    <li><i class="fas fa-retweet"></i> Высокая удержка пользователей</li>
-                    <li><i class="fas fa-network-wired"></i> Масштабируемая экономика</li>
-                    <li><i class="fas fa-code-branch"></i> API для разработчиков</li>
-                    <li><i class="fas fa-chart-pie"></i> Подробная аналитика</li>
-                </ul>
-            </div>
-        </div>
-        <div class="scenario-box">
-            <h3 style="color: var(--neon); margin-bottom: 15px;">Максимальная выгода для всех участников</h3>
-            <p>Игроки получают доход от игровых достижений. Разработчики — 85% от доходов своих игр и гранты на развитие. Инвесторы — возможность вкладывать в ликвидные игровые активы с прогнозируемым ростом. Платформа создаёт устойчивую экономику, где каждый участник получает ценность.</p>
-        </div>
+  <div class="figma-container">
+    <h2 class="section-title">ВАШИ ВЫГОДЫ</h2>
+    <div class="benefits-container">
+      <div class="benefit-category">
+        <h3>Преимущества</h3>
+        <ul class="benefit-list">
+          <li>
+            <i class="fas fa-check-circle"></i> Бесплатный старт без ограничений
+          </li>
+          <li><i class="fas fa-check-circle"></i> Play-to-Earn механики</li>
+          <li>
+            <i class="fas fa-check-circle"></i> Ежедневные награды и бонусы
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Социальные функции и кланы
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i> Регулярные обновления контента
+          </li>
+        </ul>
+      </div>
+      <div class="benefit-category">
+        <h3>Сценарии использования</h3>
+        <ul class="benefit-list">
+          <li><i class="fas fa-user-friends"></i> Турниры с друзьями</li>
+          <li><i class="fas fa-stream"></i> Стриминг геймплея</li>
+          <li><i class="fas fa-chart-bar"></i> Трейдинг игровых активов</li>
+          <li><i class="fas fa-gem"></i> Коллекционирование NFT</li>
+          <li><i class="fas fa-code"></i> Создание собственных игр</li>
+        </ul>
+      </div>
+      <div class="benefit-category">
+        <h3>Польза для бизнеса</h3>
+        <ul class="benefit-list">
+          <li><i class="fas fa-wallet"></i> Низкая стоимость привлечения</li>
+          <li><i class="fas fa-retweet"></i> Высокая удержка пользователей</li>
+          <li><i class="fas fa-network-wired"></i> Масштабируемая экономика</li>
+          <li><i class="fas fa-code-branch"></i> API для разработчиков</li>
+          <li><i class="fas fa-chart-pie"></i> Подробная аналитика</li>
+        </ul>
+      </div>
     </div>
+    <div class="scenario-box">
+      <h3 style="color: var(--neon); margin-bottom: 15px">
+        Максимальная выгода для всех участников
+      </h3>
+      <p>
+        Игроки получают доход от игровых достижений. Разработчики — 85% от
+        доходов своих игр и гранты на развитие. Инвесторы — возможность
+        вкладывать в ликвидные игровые активы с прогнозируемым ростом. Платформа
+        создаёт устойчивую экономику, где каждый участник получает ценность.
+      </p>
+    </div>
+  </div>
 </section>
 
 <!-- Блок 4: Доверие -->
 <section id="trust" class="figma-block">
-    <div class="figma-container">
-        <h2 class="section-title">ДОВЕРИЕ И ГАРАНТИИ</h2>
-        <div class="trust-grid">
-            <div class="trust-card">
-                <h3><i class="fas fa-certificate"></i> Сертификаты</h3>
-                <p>ISO 27001 (безопасность данных), лицензия на азартные игры EU, сертификат SSL EV, соответствие GDPR.</p>
-            </div>
-            <div class="trust-card">
-                <h3><i class="fas fa-handshake"></i> Партнёры</h3>
-                <p>Unity Technologies, NVIDIA, ESL Gaming, Blockchain Gaming Alliance, крупнейшие киберспортивные лиги.</p>
-            </div>
-            <div class="trust-card">
-                <h3><i class="fas fa-users"></i> Команда</h3>
-                <p>Более 50 специалистов с опытом в Ubisoft, EA, Blizzard и ведущих блокчейн-проектах.</p>
-            </div>
-            <div class="trust-card">
-                <h3><i class="fas fa-star"></i> Отзывы</h3>
-                <div class="review">
-                    "За первый месяц заработал эквивалент $500 в игровых токенах. Экономика продумана идеально."
-                    <div style="margin-top: 15px; color: var(--gold); font-weight: bold;">— Михаил, Топ-5 в глобальном рейтинге</div>
-                </div>
-            </div>
+  <div class="figma-container">
+    <h2 class="section-title">ДОВЕРИЕ И ГАРАНТИИ</h2>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <h3><i class="fas fa-certificate"></i> Сертификаты</h3>
+        <p>
+          ISO 27001 (безопасность данных), лицензия на азартные игры EU,
+          сертификат SSL EV, соответствие GDPR.
+        </p>
+      </div>
+      <div class="trust-card">
+        <h3><i class="fas fa-handshake"></i> Партнёры</h3>
+        <p>
+          Unity Technologies, NVIDIA, ESL Gaming, Blockchain Gaming Alliance,
+          крупнейшие киберспортивные лиги.
+        </p>
+      </div>
+      <div class="trust-card">
+        <h3><i class="fas fa-users"></i> Команда</h3>
+        <p>
+          Более 50 специалистов с опытом в Ubisoft, EA, Blizzard и ведущих
+          блокчейн-проектах.
+        </p>
+      </div>
+      <div class="trust-card">
+        <h3><i class="fas fa-star"></i> Отзывы</h3>
+        <div class="review">
+          "За первый месяц заработал эквивалент $500 в игровых токенах.
+          Экономика продумана идеально."
+          <div style="margin-top: 15px; color: var(--gold); font-weight: bold">
+            — Михаил, Топ-5 в глобальном рейтинге
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- КАТЕГОРИИ И ТЕГИ (перед игровыми предложениями) -->
 <section class="categories-tags-section">
-    <div class="figma-container">
-        <div class="categories-tags-wrapper">
-            <div class="categories-box">
-                <h3><i class="fas fa-folder"></i> Категории игр</h3>
-                <ul>
-                    {% if cat_selected == 0 %}
-                        <li class="selected">Все категории</li>
-                    {% else %}
-                        <li><a href="{% url 'home' %}">Все категории</a></li>
-                    {% endif %}
-                    {% show_categories cat_selected %}
-                </ul>
-            </div>
-            <div class="tags-box">
-                <h3><i class="fas fa-tags"></i> Теги</h3>
-                {% show_all_tags %}
-            </div>
-        </div>
+  <div class="figma-container">
+    <div class="categories-tags-wrapper">
+      <div class="categories-box">
+        <h3><i class="fas fa-folder"></i> Категории игр</h3>
+        <ul>
+          {% if cat_selected == 0 %}
+          <li class="selected">Все категории</li>
+          {% else %}
+          <li><a href="{% url 'home' %}">Все категории</a></li>
+          {% endif %} {% show_categories cat_selected %}
+        </ul>
+      </div>
+      <div class="tags-box">
+        <h3><i class="fas fa-tags"></i> Теги</h3>
+        {% show_all_tags %}
+      </div>
     </div>
+  </div>
 </section>
+
 
 <!-- Список игровых статей из БД -->
 <section class="articles-section">
-    <div class="figma-container">
-        <h2 class="section-title">Игровые предложения</h2>
-        <div class="articles-grid">
-            {% for article in articles %}
-            <div class="article-card">
-                <h3>{{ article.title }}</h3>
-                <p><strong>Игра:</strong> {{ article.game_name }}</p>
-                <p><strong>Жанр:</strong> {{ article.genre|default:"Не указан" }}</p>
-                <p><strong>Цена:</strong> {{ article.price }} ₽</p>
-                <p>{{ article.content|truncatewords:20 }}</p>
-                <a href="{{ article.get_absolute_url }}" class="hero-btn" style="padding: 10px 20px; font-size: 0.9rem;">Подробнее →</a>
-            </div>
-            {% empty %}
-            <p>Статьи пока не добавлены.</p>
-            {% endfor %}
-        </div>
+  <div class="figma-container">
+    <h2 class="section-title">Игровые предложения</h2>
+    <a href="{% url 'add_game' %}" class="add-game-btn">Добавить игру</a>
+    <div class="articles-grid">
+      {% for article in articles %}
+      <div class="article-card">
+        <h3>{{ article.title }}</h3>
+        <p><strong>Игра:</strong> {{ article.game_name }}</p>
+        <p><strong>Жанр:</strong> {{ article.genre|default:"Не указан" }}</p>
+        <p><strong>Цена:</strong> {{ article.price }} ₽</p>
+        <p>{{ article.content|truncatewords:20 }}</p>
+        <a
+          href="{{ article.get_absolute_url }}"
+          class="hero-btn"
+          style="padding: 10px 20px; font-size: 0.9rem"
+          >Подробнее →</a
+        >
+      </div>
+      {% empty %}
+      <p>Статьи пока не добавлены.</p>
+      {% endfor %}
     </div>
+  </div>
 </section>
 
 <!-- Блок 5: Регистрация -->
 <section id="registration" class="figma-block">
-    <div class="figma-container">
-        <div class="action-content">
-            <div class="action-form">
-                <h3>Регистрация за 1 минуту</h3>
-                <form id="registration-form" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="username"><i class="fas fa-user"></i> Имя пользователя</label>
-                        <input type="text" id="username" name="username" class="form-control" placeholder="Игровой никнейм" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="password"><i class="fas fa-lock"></i> Пароль</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Минимум 8 символов" required />
-                    </div>
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-user-plus"></i> СОЗДАТЬ БЕСПЛАТНЫЙ АККАУНТ
-                    </button>
-                </form>
-            </div>
-            <div class="contacts">
-                <h3>Контакты и поддержка</h3>
-                <p>Есть вопросы? Наша команда поддержки доступна 24/7.</p>
-                <ul class="contact-list">
-                    <li><i class="fas fa-headset" style="color: var(--neon);"></i> Поддержка в Discord и Telegram</li>
-                    <li><i class="fas fa-envelope" style="color: var(--neon-pink);"></i> support@аркада-платформа.ру</li>
-                    <li><i class="fas fa-phone" style="color: var(--neon);"></i> +7 (XXX) XXX-XX-XX</li>
-                    <li><i class="fas fa-map-marker-alt" style="color: var(--accent-light);"></i> Москва, Технопарк</li>
-                </ul>
-                <div style="margin-top: 40px;">
-                    <h4 style="color: var(--neon); margin-bottom: 20px;">Попробуйте демо</h4>
-                    <a href="#" class="hero-btn" style="padding: 15px 35px; font-size: 1rem; display: inline-block;">
-                        <i class="fas fa-play"></i> ДЕМО-РЕЖИМ
-                    </a>
-                </div>
-            </div>
+  <div class="figma-container">
+    <div class="action-content">
+      <div class="action-form">
+        <h3>Регистрация за 1 минуту</h3>
+        <form id="registration-form" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="email"><i class="fas fa-envelope"></i> Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="username"
+              ><i class="fas fa-user"></i> Имя пользователя</label
+            >
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-control"
+              placeholder="Игровой никнейм"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password"><i class="fas fa-lock"></i> Пароль</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="Минимум 8 символов"
+              required
+            />
+          </div>
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-user-plus"></i> СОЗДАТЬ БЕСПЛАТНЫЙ АККАУНТ
+          </button>
+        </form>
+      </div>
+      <div class="contacts">
+        <h3>Контакты и поддержка</h3>
+        <p>Есть вопросы? Наша команда поддержки доступна 24/7.</p>
+        <ul class="contact-list">
+          <li>
+            <i class="fas fa-headset" style="color: var(--neon)"></i> Поддержка
+            в Discord и Telegram
+          </li>
+          <li>
+            <i class="fas fa-envelope" style="color: var(--neon-pink)"></i>
+            support@аркада-платформа.ру
+          </li>
+          <li>
+            <i class="fas fa-phone" style="color: var(--neon)"></i> +7 (XXX)
+            XXX-XX-XX
+          </li>
+          <li>
+            <i
+              class="fas fa-map-marker-alt"
+              style="color: var(--accent-light)"
+            ></i>
+            Москва, Технопарк
+          </li>
+        </ul>
+        <div style="margin-top: 40px">
+          <h4 style="color: var(--neon); margin-bottom: 20px">
+            Попробуйте демо
+          </h4>
+          <a
+            href="#"
+            class="hero-btn"
+            style="padding: 15px 35px; font-size: 1rem; display: inline-block"
+          >
+            <i class="fas fa-play"></i> ДЕМО-РЕЖИМ
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 </section>
-
 
 {% endblock %}

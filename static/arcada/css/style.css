@@ -88,6 +88,7 @@ body {
   display: flex;
   gap: 35px;
   list-style: none;
+  flex-wrap: nowrap;
 }
 
 .nav-menu a {
@@ -274,6 +275,7 @@ body {
   color: white;
   transition: var(--transition);
 }
+
 
 .gallery-item:hover {
   transform: scale(1.08);
@@ -500,7 +502,7 @@ footer {
 }
 
 a {
-  text-decoration-color: #00f7ff;
+  text-decoration-color: none;
 }
 
 .footer-column h4 {
@@ -1109,4 +1111,66 @@ footer {
 .tags-box .selected {
   color: var(--neon);
   font-weight: bold;
+}
+
+.add-game-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--accent), var(--neon-pink));
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    border: 2px solid transparent;
+}
+
+.add-game-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(106, 17, 203, 0.5);
+    border-color: var(--neon);
+}
+
+/* ===== ПЕРЕОПРЕДЕЛЕНИЕ СТИЛЕЙ ДЛЯ ПОЛЕЙ ФОРМЫ ===== */
+.add-form input,
+.add-form select,
+.add-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(10, 10, 20, 0.8) !important;
+    border: 1px solid rgba(106, 17, 203, 0.5) !important;
+    border-radius: 12px !important;
+    color: #f0f0f0 !important;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.add-form input:focus,
+.add-form select:focus,
+.add-form textarea:focus {
+    outline: none !important;
+    border-color: #00f7ff !important;
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.3) !important;
+    background: rgba(10, 10, 20, 0.95) !important;
+}
+
+/* Стили для чекбокса (если есть) */
+.add-form input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Стили для select (выпадающий список) */
+.add-form select option {
+    background: #0a0a14;
+    color: #f0f0f0;
+}
+
+/* Стили для многострочного textarea */
+.add-form textarea {
+    resize: vertical;
+    min-height: 100px;
 }

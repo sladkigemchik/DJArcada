@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from arcada.models import GameArticle, Category, TagPost
+from .forms import AddGameForm 
 
 menu = [
     {'title': 'О сайте', 'url_name': 'about'},
@@ -50,3 +51,13 @@ def show_tag_articles(request, tag_slug):
         'menu': menu,
         'cat_selected': None,
     })
+
+def add_game(request):
+    if request.method == 'POST':
+        form = AddGameForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = AddGameForm()
+    return render(request, 'arcada/add_game.html', {'form': form, 'title': 'Добавить игру'})    

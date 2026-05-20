@@ -7,6 +7,7 @@ urlpatterns = [
     path('article/<slug:article_slug>/', views.article_detail, name='article_detail'), 
     path('category/<slug:cat_slug>/', views.show_category, name='category'),
     path('tag/<slug:tag_slug>/', views.show_tag_articles, name='tag'),
+    path('add/', views.add_game, name='add_game'),
 ]
 
 handler404 = views.page_not_found
