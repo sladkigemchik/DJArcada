@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, db_index=True)
-    slug = models.SlugField(max_length=255, unique=True, db_index=True)
+    name = models.CharField(max_length=100, db_index=True, verbose_name="Название")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self):
         return self.name
@@ -17,7 +17,8 @@ class Category(models.Model):
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status=GameArticle.Status.PUBLISHED)
-    
+
+
 class GameArticle(models.Model):
     tags = models.ManyToManyField('TagPost', blank=True, related_name='articles')
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, related_name='articles')
@@ -58,8 +59,8 @@ class GameArticle(models.Model):
 
 
 class TagPost(models.Model):
-    tag = models.CharField(max_length=100, db_index=True)
-    slug = models.SlugField(max_length=255, unique=True, db_index=True)
+    tag = models.CharField(max_length=100, db_index=True, verbose_name="Тег")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self):
         return self.tag
