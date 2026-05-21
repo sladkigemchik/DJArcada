@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'arcada/css/custom_admin.css' %}">
+{% endblock %}
+
+{% block title %}Arcada Project — Админ-панель{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Arcada Project — Управление играми</a></h1>
+{% endblock %}

@@ -1,0 +1,46 @@
+/* Меняем цвет всего интерфейса */
+body {
+    background: #0a0a14 !important;
+}
+
+#container {
+    background: #0a0a14 !important;
+}
+
+#content {
+    background: #0a0a14 !important;
+}
+
+#header {
+    background: #0a0a14 !important;
+}
+
+div.breadcrumbs {
+    background: #121225 !important;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #121225 !important;
+}
+
+#changelist-filter {
+    background: #0a0a14 !important;
+}
+
+#changelist table td {
+    background: #0a0a14 !important;
+}
+
+#changelist table th {
+    background: #121225 !important;
+}
+
+input, select, textarea {
+    background: #0a0a14 !important;
+    color: white !important;
+    border-color: #6a11cb !important;
+}
+
+a:link, a:visited {
+    color: #00f7ff !important;
+}
