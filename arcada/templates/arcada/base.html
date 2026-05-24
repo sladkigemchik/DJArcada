@@ -29,6 +29,7 @@
           <li><a href="{% url 'home' %}#benefits">Выгоды</a></li>
           <li><a href="{% url 'home' %}#trust">Доверие</a></li>
           <li><a href="{% url 'about' %}">Блог</a></li>
+          <li><a href="{% url 'ai_chat' %}">ИИ</a></li>
     {% if user.is_authenticated %}
     <li>
       <li><a href="{% url 'users:profile' %}">{{ user.username }}</a></li>
@@ -88,5 +89,6 @@
         </div>
       </div>
     </footer>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>

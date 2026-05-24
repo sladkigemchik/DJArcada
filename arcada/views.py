@@ -5,6 +5,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+import openai
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+import json
 
 menu = [
     {'title': 'О сайте', 'url_name': 'about'},
@@ -69,3 +74,41 @@ def add_game(request):
     else:
         form = AddGameForm()
     return render(request, 'arcada/add_game.html', {'form': form, 'title': 'Добавить игру'})
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def ask_yandex_gpt(request):
+    try:
+        data = json.loads(request.body)
+        user_message = data.get('question', '')
+
+        if not user_message:
+            return JsonResponse({'error': 'Пустой запрос'}, status=400)
+
+        YANDEX_FOLDER_ID = ''
+        YANDEX_API_KEY = ''
+        YANDEX_MODEL = "aliceai-llm"  
+
+        client = openai.OpenAI(
+            api_key=YANDEX_API_KEY,
+            project=YANDEX_FOLDER_ID,
+            base_url="https://ai.api.cloud.yandex.net/v1"
+        )
+
+        response = client.responses.create(
+            model=f"gpt://{YANDEX_FOLDER_ID}/{YANDEX_MODEL}",
+            input=user_message,
+            temperature=0.8,
+            max_output_tokens=1000
+        )
+
+        answer = response.output[0].content[0].text
+
+        return JsonResponse({'answer': answer})
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+    
+def ai_chat(request):
+    return render(request, 'arcada/ai_chat.html', {'title': 'Чат с ИИ'})

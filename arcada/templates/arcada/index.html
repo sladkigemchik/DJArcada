@@ -2,7 +2,7 @@
 {% load static %}
 {% load arcada_tags %} 
 
-{%block title %}Free-to-Play Игровая Платформа{% endblock %}
+{% block title %}Free-to-Play Игровая Платформа{% endblock %}
 
 {% block content %}
 <!-- Блок 1: Герой -->
@@ -224,7 +224,6 @@
   </div>
 </section>
 
-
 <!-- Список игровых статей из БД -->
 <section class="articles-section">
   <div class="figma-container">
@@ -237,7 +236,7 @@
         <p><strong>Игра:</strong> {{ article.game_name }}</p>
         <p><strong>Жанр:</strong> {{ article.genre|default:"Не указан" }}</p>
         <p><strong>Цена:</strong> {{ article.price }} ₽</p>
-         <p><strong>Автор:</strong> {{ article.author.username|default:"Аноним" }}</p>   
+        <p><strong>Автор:</strong> {{ article.author.username|default:"Аноним" }}</p>   
         <p>{{ article.content|truncatewords:20 }}</p>
         <a
           href="{{ article.get_absolute_url }}"
@@ -253,6 +252,34 @@
   </div>
 </section>
 
+<!-- КАРТА -->
+<section class="map-section">
+  <div class="figma-container">
+    <h2 class="section-title">Мы на карте</h2>
+    <div id="map"></div>
+  </div>
+</section>
 
+{% endblock %}
 
+{% block extra_js %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey=8bf29525-46c2-4096-acfd-b4da93cc33fb&lang=ru_RU" type="text/javascript"></script>
+<script type="text/javascript">
+    ymaps.ready(init);
+    function init() {
+        var myPlace = [55.794133, 49.140613];  
+        var myMap = new ymaps.Map("map", {
+            center: myPlace,
+            zoom: 16,
+            controls: ['zoomControl', 'fullscreenControl']
+        });
+        var myPlacemark = new ymaps.Placemark(myPlace, {
+            hintContent: 'Наш офис',
+            balloonContent: '<strong>Аркада-Платформа</strong><br>Казань, ул. Карла Маркса, 68'
+        }, {
+            preset: 'islands#redDotIcon'
+        });
+        myMap.geoObjects.add(myPlacemark);
+    }
+</script>
 {% endblock %}
