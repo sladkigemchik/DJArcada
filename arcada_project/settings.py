@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'arcada'
+    'arcada',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -113,8 +114,13 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'users:login'
+LOGIN_URL = 'users:login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTH_USER_MODEL = 'users.User'

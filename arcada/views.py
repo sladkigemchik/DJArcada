@@ -1,6 +1,10 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from arcada.models import GameArticle, Category, TagPost
-from .forms import AddGameForm 
+from .forms import AddGameForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 menu = [
     {'title': 'О сайте', 'url_name': 'about'},
@@ -52,12 +56,16 @@ def show_tag_articles(request, tag_slug):
         'cat_selected': None,
     })
 
+@login_required
 def add_game(request):
     if request.method == 'POST':
         form = AddGameForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            game = form.save(commit=False)
+            game.author = request.user   
+            game.save()
+            form.save_m2m()  
             return redirect('home')
     else:
         form = AddGameForm()
-    return render(request, 'arcada/add_game.html', {'form': form, 'title': 'Добавить игру'})    
+    return render(request, 'arcada/add_game.html', {'form': form, 'title': 'Добавить игру'})

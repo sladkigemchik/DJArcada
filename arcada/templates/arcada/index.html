@@ -237,6 +237,7 @@
         <p><strong>Игра:</strong> {{ article.game_name }}</p>
         <p><strong>Жанр:</strong> {{ article.genre|default:"Не указан" }}</p>
         <p><strong>Цена:</strong> {{ article.price }} ₽</p>
+         <p><strong>Автор:</strong> {{ article.author.username|default:"Аноним" }}</p>   
         <p>{{ article.content|truncatewords:20 }}</p>
         <a
           href="{{ article.get_absolute_url }}"
@@ -252,93 +253,6 @@
   </div>
 </section>
 
-<!-- Блок 5: Регистрация -->
-<section id="registration" class="figma-block">
-  <div class="figma-container">
-    <div class="action-content">
-      <div class="action-form">
-        <h3>Регистрация за 1 минуту</h3>
-        <form id="registration-form" method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="email"><i class="fas fa-envelope"></i> Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-control"
-              placeholder="your@email.com"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="username"
-              ><i class="fas fa-user"></i> Имя пользователя</label
-            >
-            <input
-              type="text"
-              id="username"
-              name="username"
-              class="form-control"
-              placeholder="Игровой никнейм"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="password"><i class="fas fa-lock"></i> Пароль</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="form-control"
-              placeholder="Минимум 8 символов"
-              required
-            />
-          </div>
-          <button type="submit" class="submit-btn">
-            <i class="fas fa-user-plus"></i> СОЗДАТЬ БЕСПЛАТНЫЙ АККАУНТ
-          </button>
-        </form>
-      </div>
-      <div class="contacts">
-        <h3>Контакты и поддержка</h3>
-        <p>Есть вопросы? Наша команда поддержки доступна 24/7.</p>
-        <ul class="contact-list">
-          <li>
-            <i class="fas fa-headset" style="color: var(--neon)"></i> Поддержка
-            в Discord и Telegram
-          </li>
-          <li>
-            <i class="fas fa-envelope" style="color: var(--neon-pink)"></i>
-            support@аркада-платформа.ру
-          </li>
-          <li>
-            <i class="fas fa-phone" style="color: var(--neon)"></i> +7 (XXX)
-            XXX-XX-XX
-          </li>
-          <li>
-            <i
-              class="fas fa-map-marker-alt"
-              style="color: var(--accent-light)"
-            ></i>
-            Москва, Технопарк
-          </li>
-        </ul>
-        <div style="margin-top: 40px">
-          <h4 style="color: var(--neon); margin-bottom: 20px">
-            Попробуйте демо
-          </h4>
-          <a
-            href="#"
-            class="hero-btn"
-            style="padding: 15px 35px; font-size: 1rem; display: inline-block"
-          >
-            <i class="fas fa-play"></i> ДЕМО-РЕЖИМ
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 {% endblock %}

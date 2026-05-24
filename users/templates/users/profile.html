@@ -1,0 +1,26 @@
+{% extends 'arcada/base.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<section class="figma-block" style="padding-top: 120px">
+    <div class="figma-container">
+        <h2 class="section-title">Профиль пользователя</h2>
+        <form method="post" enctype="multipart/form-data" class="add-form">
+            {% csrf_token %}
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for f in form %}
+            <div class="form-field">
+                <label for="{{ f.id_for_label }}">{{ f.label }}:</label>
+                {{ f }}
+                <div class="form-error">{{ f.errors }}</div>
+            </div>
+            {% endfor %}
+            <button type="submit" class="submit-btn">Сохранить</button>
+        </form>
+        <hr>
+        <p><a href="{% url 'users:password_change' %}">Сменить пароль</a></p>
+    </div>
+</section>
+{% endblock %}

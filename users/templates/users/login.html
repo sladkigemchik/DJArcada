@@ -1,0 +1,26 @@
+{% extends 'arcada/base.html' %}
+{% load static %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<section class="figma-block" style="padding-top: 120px">
+    <div class="figma-container">
+        <h2 class="section-title">Авторизация</h2>
+        <form method="post" class="add-form">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for f in form %}
+            <div class="form-field">
+                <label for="{{ f.id_for_label }}">{{ f.label }}:</label>
+                {{ f }}
+                <div class="form-error">{{ f.errors }}</div>
+            </div>
+            {% endfor %}
+            <button type="submit" class="submit-btn">Войти</button>
+            <p style="margin-top: 20px;"><a href="{% url 'users:password_reset' %}">Забыли пароль?</a></p>
+        </form>
+    </div>
+</section>
+{% endblock %}

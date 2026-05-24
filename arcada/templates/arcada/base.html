@@ -25,11 +25,22 @@
         </button>
 
         <ul class="nav-menu" id="navMenu">
-          <li><a href="{% url 'home' %}#about">О проекте</a></li>
+          <li><a href="{% url 'home' %}#about">Проект</a></li>
           <li><a href="{% url 'home' %}#benefits">Выгоды</a></li>
           <li><a href="{% url 'home' %}#trust">Доверие</a></li>
-          <li><a href="{% url 'home' %}#registration">Регистрация</a></li>
           <li><a href="{% url 'about' %}">Блог</a></li>
+    {% if user.is_authenticated %}
+    <li>
+      <li><a href="{% url 'users:profile' %}">{{ user.username }}</a></li>
+        <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer; font-weight: 700;">Выйти</button>
+        </form>
+    </li>
+{% else %}
+    <li><a href="{% url 'users:login' %}">Войти</a></li>
+    <li><a href="{% url 'users:register' %}">Регистрация</a></li>
+{% endif %}
         </ul>
       </div>
     </nav>

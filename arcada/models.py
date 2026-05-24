@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User   
+from django.contrib.auth.models import User 
+from django.conf import settings  
 
 
 class Category(models.Model):
@@ -22,6 +23,7 @@ class PublishedManager(models.Manager):
 class GameArticle(models.Model):
     tags = models.ManyToManyField('TagPost', blank=True, related_name='articles')
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, related_name='articles')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='articles', verbose_name='Автор')
     
     class Status(models.IntegerChoices):
         DRAFT = 0, "Черновик"
@@ -77,9 +79,12 @@ class TagPost(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(blank=True, verbose_name="О себе")
     phone = models.CharField(max_length=20, blank=True, verbose_name="Телефон")
     
     def __str__(self):
         return f"Профиль {self.user.username}"
+    
+
+

@@ -1174,3 +1174,17 @@ footer {
     resize: vertical;
     min-height: 100px;
 }
+
+.nav-link-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+

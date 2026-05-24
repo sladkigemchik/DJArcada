@@ -66,12 +66,3 @@ class TagPostAdmin(admin.ModelAdmin):
     search_fields = ('tag',)
     prepopulated_fields = {'slug': ('tag',)}
 
-
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'bio', 'phone')
-
-
-admin.site.site_header = "Панель управления Arcada Project"
-admin.site.site_title = "Arcada Admin"
-admin.site.index_title = "Добро пожаловать в панель администратора"
