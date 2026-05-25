@@ -86,8 +86,8 @@ def ask_yandex_gpt(request):
         if not user_message:
             return JsonResponse({'error': 'Пустой запрос'}, status=400)
 
-        YANDEX_FOLDER_ID = ''
-        YANDEX_API_KEY = ''
+        YANDEX_FOLDER_ID = 'b1gask1fg9a7nmj0g2gt'
+        YANDEX_API_KEY = 'AQVNw81AyPZPAEOPsOfwBLaQXK_gl3VMO1XnqOD9'
         YANDEX_MODEL = "aliceai-llm"  
 
         client = openai.OpenAI(
