@@ -5,7 +5,7 @@ from .models import GameArticle, Category, TagPost
 class AddGameForm(forms.ModelForm):
     class Meta:
         model = GameArticle
-        fields = ['title', 'slug', 'game_name', 'genre', 'price', 'content', 'cat', 'tags', 'status', 'image']
+        fields = ['title', 'slug', 'game_name', 'genre', 'price', 'content', 'cat', 'tags', 'image']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
@@ -27,14 +27,3 @@ class AddGameForm(forms.ModelForm):
         required=False,
         widget=forms.SelectMultiple(attrs={'class': 'form-control'})
     )
-    status = forms.BooleanField(
-        required=False,
-        label="Опубликовать",
-        widget=forms.CheckboxInput(attrs={'class': 'form-checkbox'})
-    )
-
-    def clean_status(self):
-        value = self.cleaned_data.get('status')
-        if value is True:
-            return GameArticle.Status.PUBLISHED  
-        return GameArticle.Status.DRAFT  

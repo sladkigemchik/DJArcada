@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Управление пользователями</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <div style="padding: 10px; margin: 10px 0; background: {% if message.tags == 'success' %}green{% else %}red{% endif %}; color: white;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<table border="1" style="width:100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя пользователя</th>
+            <th>Email</th>
+            <th>Роль</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr style="{% if user.is_banned %}background-color:#ffcccc;{% endif %}">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                {% if user.role == 'admin' %}👑 Админ
+                {% elif user.role == 'moderator' %}🛡️ Модератор
+                {% else %}👤 Пользователь
+                {% endif %}
+            </td>
+            <td>
+                {% if user.is_banned %}
+                    ⛔ Забанен
+                    {% if user.ban_reason %}
+                        <br><small>Причина: {{ user.ban_reason }}</small>
+                    {% endif %}
+                {% else %}
+                    ✅ Активен
+                {% endif %}
+            </td>
+            <td>
+                {% if user.is_banned %}
+                    <form method="post" action="{% url 'users:unban_user' user.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background:green; color:white; padding:5px 10px;">Разбанить</button>
+                    </form>
+                {% else %}
+                    <form method="post" action="{% url 'users:ban_user' user.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="text" name="ban_reason" placeholder="Причина бана" required style="padding:5px;">
+                        <button type="submit" style="background:red; color:white; padding:5px 10px;">Забанить</button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

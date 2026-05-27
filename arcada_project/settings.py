@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'users.middleware.BanMiddleware',
 ]
 
 ROOT_URLCONF = 'arcada_project.urls'
@@ -131,3 +132,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'hoppi2hope@gmail.com'
 EMAIL_HOST_PASSWORD = 'txbieegxwmrqpefp'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

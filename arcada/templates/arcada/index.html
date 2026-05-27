@@ -4,6 +4,7 @@
 
 {% block title %}Free-to-Play Игровая Платформа{% endblock %}
 
+
 {% block content %}
 <!-- Блок 1: Герой -->
 <section id="hero" class="figma-block">
@@ -228,9 +229,14 @@
 <section class="articles-section">
   <div class="figma-container">
     <h2 class="section-title">Игровые предложения</h2>
-    <a href="{% url 'add_game' %}" class="add-game-btn">Добавить игру</a>
+    {% if user.role == 'user' %}
+    <a href="{% url 'add_game' %}" class="add-game-btn"> Предложить статью</a>
+    {% endif %}
+    {% if user.role == 'moderator' or user.role == 'admin' %}
+    <a href="{% url 'pending_articles' %}" class="add-game-btn">На модерации</a>
+  {% endif %}
     <div class="articles-grid">
-      {% for article in articles %}
+      {% for article in page_obj %}
       <div class="article-card">
         <h3>{{ article.title }}</h3>
         <p><strong>Игра:</strong> {{ article.game_name }}</p>

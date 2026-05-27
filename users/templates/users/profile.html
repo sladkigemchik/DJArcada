@@ -6,21 +6,73 @@
 {% block content %}
 <section class="figma-block" style="padding-top: 120px">
     <div class="figma-container">
-        <h2 class="section-title">Профиль пользователя</h2>
-        <form method="post" enctype="multipart/form-data" class="add-form">
-            {% csrf_token %}
-            <div class="form-error">{{ form.non_field_errors }}</div>
-            {% for f in form %}
-            <div class="form-field">
-                <label for="{{ f.id_for_label }}">{{ f.label }}:</label>
-                {{ f }}
-                <div class="form-error">{{ f.errors }}</div>
+        <h2 class="section-title">👤 Профиль пользователя</h2>
+        
+        <div class="profile-info">
+            <div class="info-item">
+                <strong>Логин:</strong> {{ user.username }}
             </div>
-            {% endfor %}
-            <button type="submit" class="submit-btn">Сохранить</button>
-        </form>
-        <hr>
-        <p><a href="{% url 'users:password_change' %}">Сменить пароль</a></p>
+            <div class="info-item">
+                <strong>Email:</strong> {{ user.email }}
+            </div>
+            <div class="info-item">
+                <strong>Роль:</strong> 
+                {% if user.role == 'admin' %}👑 Администратор
+                {% elif user.role == 'moderator' %}🛡️ Модератор
+                {% else %}👤 Пользователь
+                {% endif %}
+            </div>
+            <div class="info-item">
+                <strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}
+            </div>
+        </div>
+        
+        <hr style="margin: 30px 0; border-color: rgba(106, 17, 203, 0.3);">
+        
+        <div style="display: flex; gap: 15px; justify-content: center;">
+            <a href="{% url 'users:password_change' %}" class="hero-btn">🔐 Сменить пароль</a>
+            <a href="{% url 'home' %}" class="hero-btn" style="background: gray;">← На главную</a>
+        </div>
+        
+        {% if user.role == 'moderator' or user.role == 'admin' %}
+            <div style="margin-top: 20px; text-align: center;">
+                <a href="{% url 'users:user_list' %}" class="hero-btn" style="background: orange;">👥 Управление пользователями</a>
+            </div>
+        {% endif %}
     </div>
 </section>
+
+<style>
+    .profile-info {
+        max-width: 500px;
+        margin: 0 auto;
+        background: rgba(18, 18, 37, 0.8);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid rgba(106, 17, 203, 0.3);
+    }
+    
+    .info-item {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1.1rem;
+    }
+    
+    .info-item:last-child {
+        border-bottom: none;
+    }
+    
+    .info-item strong {
+        color: var(--neon);
+        display: inline-block;
+        width: 150px;
+    }
+    
+    hr {
+        margin: 30px 0;
+        border: none;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--neon), transparent);
+    }
+</style>
 {% endblock %}

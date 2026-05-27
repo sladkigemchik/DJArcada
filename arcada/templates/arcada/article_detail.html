@@ -1,45 +1,187 @@
-{% extends 'arcada/base.html' %} {% load static %} {% block title %}
-АРКАДА-ПЛАТФОРМА{% endblock %} {% block content %} {% if article.image %}
-<div class="article-image">
-  <img
-    src="{{ article.image.url }}"
-    alt="{{ article.title }}"
-    style="max-width: 100%; border-radius: 20px"
-  />
-</div>
-{% endif %}
-<section class="figma-block" style="padding-top: 120px">
-  <div class="figma-container">
-    <a
-      href="{% url 'home' %}"
-      class="back-link"
-      style="
+{% extends 'arcada/base.html' %}
+
+{% block content %}
+<style>
+    .article-page {
+        padding-top: 120px;
+        min-height: 100vh;
+    }
+    
+    .article-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: rgba(18, 18, 37, 0.8);
+        border-radius: 30px;
+        padding: 40px;
+        border: 1px solid rgba(106, 17, 203, 0.3);
+        backdrop-filter: blur(10px);
+    }
+    
+    .article-title {
+        font-size: 2.5rem;
         color: var(--neon);
-        text-decoration: none;
-        display: inline-block;
-        margin-bottom: 30px;
-      "
-      >← Назад к списку</a
-    >
-
-    <h1 style="color: var(--neon); margin-bottom: 20px">{{ article.title }}</h1>
-
-    <div
-      style="
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .article-meta {
         display: flex;
-        gap: 20px;
         flex-wrap: wrap;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
+        gap: 20px;
+        padding: 20px 0;
         border-bottom: 1px solid rgba(106, 17, 203, 0.3);
-      "
-    >
-      <span><i class="fas fa-gamepad"></i> {{ article.game_name }}</span>
-      <span><i class="fas fa-tag"></i> {{ article.genre }}</span>
-      <span><i class="fas fa-ruble-sign"></i> {{ article.price }} ₽</span>
-    </div>
+        margin-bottom: 30px;
+        color: var(--text-light);
+    }
+    
+    .article-meta p {
+        margin: 0;
+    }
+    
+    .article-meta strong {
+        color: var(--neon);
+    }
+    
+    .article-image {
+        text-align: center;
+        margin: 30px 0;
+    }
+    
+    .article-image img {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 20px;
+        border: 2px solid rgba(106, 17, 203, 0.5);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .article-content {
+        margin: 30px 0;
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+    
+    .article-content h3 {
+        color: var(--neon);
+        margin-bottom: 15px;
+    }
+    
+    .article-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 30px 0;
+        padding-top: 20px;
+        border-top: 1px solid rgba(106, 17, 203, 0.3);
+    }
+    
+    .tag {
+        background: rgba(106, 17, 203, 0.3);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin: 30px 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-back {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+        padding: 12px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    
+    .btn-back:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    @media (max-width: 768px) {
+        .article-container {
+            padding: 20px;
+            margin: 0 15px;
+        }
+        
+        .article-title {
+            font-size: 1.8rem;
+        }
+        
+        .article-meta {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
 
-    <div style="line-height: 1.8">{{ article.content|linebreaks }}</div>
-  </div>
-</section>
+<div class="article-page">
+    <div class="container">
+        <div class="article-container">
+            <h1 class="article-title">{{ article.title }}</h1>
+            
+            <div class="article-meta">
+                <p><strong>🎮 Игра:</strong> {{ article.game_name }}</p>
+                <p><strong>🎭 Жанр:</strong> {{ article.genre|default:"Не указан" }}</p>
+                <p><strong>💰 Цена:</strong> {{ article.price }} ₽</p>
+                <p><strong>📂 Категория:</strong> {{ article.cat.name }}</p>
+                <p><strong>👤 Автор:</strong> {{ article.author.username|default:"Аноним" }}</p>
+                <p><strong>📅 Дата:</strong> {{ article.time_create|date:"d.m.Y" }}</p>
+            </div>
+            
+            {% if article.image %}
+                <div class="article-image">
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}">
+                </div>
+            {% endif %}
+            
+            <div class="article-content">
+                <h3>📖 Описание:</h3>
+                <p>{{ article.content|linebreaks }}</p>
+            </div>
+            
+            {% if article.tags.all %}
+                <div class="article-tags">
+                    <strong>🏷️ Теги:</strong>
+                    {% for tag in article.tags.all %}
+                        <span class="tag">{{ tag.tag }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <!-- Кнопки для модераторов и админов -->
+            {% if user.role == 'moderator' or user.role == 'admin' %}
+                <div class="action-buttons">
+                    <a href="{% url 'edit_article' article.id %}" class="hero-btn" style="background: orange;">✏️ Редактировать</a>
+                    
+                    <form method="post" style="display: inline;" onsubmit="return confirm('Удалить статью?')">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="delete">
+                        <button type="submit" class="hero-btn" style="background: red;">🗑️ Удалить</button>
+                    </form>
+                    
+                    {% if article.status == 2 %}
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="approve">
+                            <button type="submit" class="hero-btn" style="background: green;">✅ Опубликовать</button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="{% url 'home' %}" class="btn-back">← На главную</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

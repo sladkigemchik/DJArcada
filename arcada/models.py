@@ -28,6 +28,7 @@ class GameArticle(models.Model):
     class Status(models.IntegerChoices):
         DRAFT = 0, "Черновик"
         PUBLISHED = 1, "Опубликовано"
+        PENDING = 2, "На модерации"
     
     title = models.CharField(max_length=255, verbose_name="Заголовок")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
@@ -42,11 +43,11 @@ class GameArticle(models.Model):
     status = models.IntegerField(choices=Status.choices, default=Status.DRAFT, verbose_name="Статус")
     
     image = models.ImageField(
-    upload_to='games/%Y/%m/%d/',
-    blank=True,
-    null=True,
-    verbose_name='Изображение'
-)
+        upload_to='games/%Y/%m/%d/',
+        blank=True,
+        null=True,
+        verbose_name='Изображение'
+    )
     
     objects = models.Manager()           
     published = PublishedManager()       
@@ -85,6 +86,3 @@ class UserProfile(models.Model):
     
     def __str__(self):
         return f"Профиль {self.user.username}"
-    
-
-
